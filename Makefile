@@ -1,5 +1,5 @@
 LOCAL_NAME=caffe
-VERSION=caffe-cuda7.0-cudnn4
+VERSION=master-cuda7.0-cudnn4
 
 
 .PHONY: all build test

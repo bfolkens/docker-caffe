@@ -1,19 +1,20 @@
 LOCAL_NAME=caffe
-VERSION=master-cuda7.0-cudnn4
+VERSION=cuda8.0-cudnn5
 PUBLIC_NAME=docker-caffe
 REPOSITORY=bfolkens
+DOCKER=docker
 
 
 .PHONY: all build tag release
 
-all: build tag release
+all: build
 
 build:
-	docker build -t $(LOCAL_NAME):$(VERSION) --rm .
+	$(DOCKER) build -t $(LOCAL_NAME):$(VERSION) --rm .
 
 tag: build
-	docker tag -f $(LOCAL_NAME):$(VERSION) $(REPOSITORY)/$(PUBLIC_NAME):$(VERSION)
+	$(DOCKER) tag $(LOCAL_NAME):$(VERSION) $(REPOSITORY)/$(PUBLIC_NAME):$(VERSION)
 
 release: tag
-	docker push $(REPOSITORY)/$(PUBLIC_NAME):$(VERSION)
+	$(DOCKER) push $(REPOSITORY)/$(PUBLIC_NAME):$(VERSION)
 

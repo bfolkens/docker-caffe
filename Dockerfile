@@ -1,4 +1,4 @@
-FROM nvidia/cuda:7.0-cudnn4-devel
+FROM nvidia/cuda:8.0-cudnn5-devel
 
 # Install some dep packages
 

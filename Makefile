@@ -1,5 +1,5 @@
 LOCAL_NAME=caffe
-VERSION=cuda8.0-cudnn5
+VERSION=`git rev-parse --abbrev-ref HEAD`
 PUBLIC_NAME=docker-caffe
 REPOSITORY=bfolkens
 DOCKER=docker
@@ -17,4 +17,3 @@ tag: build
 
 release: tag
 	$(DOCKER) push $(REPOSITORY)/$(PUBLIC_NAME):$(VERSION)
-

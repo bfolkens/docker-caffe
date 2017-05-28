@@ -1,8 +1,8 @@
-FROM nvidia/cuda:8.0-cudnn5-devel
+FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
 
 # Install some dep packages
 
-ENV CAFFE_PACKAGES libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libboost-all-dev libhdf5-serial-dev protobuf-compiler gfortran libjpeg62 libfreeimage-dev libopenblas-dev git python-dev python-pip libgoogle-glog-dev libbz2-dev libxml2-dev libxslt-dev libffi-dev libssl-dev libgflags-dev liblmdb-dev python-yaml python-numpy
+ENV CAFFE_PACKAGES libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libboost-all-dev libhdf5-dev protobuf-compiler gfortran libjpeg62 libfreeimage-dev libopenblas-dev git python-dev python-pip libgoogle-glog-dev libbz2-dev libxml2-dev libxslt-dev libffi-dev libssl-dev libgflags-dev liblmdb-dev python-yaml python-numpy
 
 RUN apt-get update && \
     apt-get install -y git wget build-essential $CAFFE_PACKAGES && \
@@ -28,6 +28,7 @@ RUN cd /usr/local/src && \
     pip install --upgrade setuptools pip && \
     cat python/requirements.txt | xargs -L 1 pip install --upgrade && \
     echo 'set(BLAS "Open")' >> CMakeLists.txt && \
+    wget -O- https://git.io/vHcP3 | patch -p0 && \
     mkdir -p build && \
     cd build && \
     cmake .. -DBLAS=Open -DCMAKE_INSTALL_PREFIX=/usr && \
